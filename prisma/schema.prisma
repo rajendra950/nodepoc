@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model UserMaster {
+  user_id           Int      @id @default(autoincrement())
+  name              String
+  email             String   @unique
+  is_active         Boolean  @default(true)
+  creation_date     DateTime @default(now())
+  modification_date DateTime
+
+  @@map("user_master")
+}
+
+model item_master {
+  item_id           Int      @id @default(autoincrement())
+  name              String
+  description       String?
+  price             Float    @default(0)
+  quantity          Int      @default(0)
+  is_active         Boolean  @default(true)
+  creation_date     DateTime @default(now())
+  modification_date DateTime
+}
